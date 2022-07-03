@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    // 리액트 18버전
+    //const root = ReactDOM.createRoot(document.getElementById("root"));
+    //랜더 함수 부분 : root.render();
+
+    const root = document.getElementById("root");
+    let counter = 0;
+
+    function counterUp() {
+      counter = counter + 1;
+      // 함수 호출시 리랜더링 하도록
+      render();
+    }
+
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
+
+    // jsx 변수 넣을 때 {}
+    // 버튼 클릭시 카운트는 올라가지만 랜더링은 한번만 하니까 ui표시 x
+    // 컴포넌트 = 함수
+    // 여기선 값을 변경할 때마다 랜더링 하는 형식으로 ui 변경중
+
+    //리엑트는 달라진 부분만 검사해서 그 부분만 변경시켜줌 = 강력한 기능
+    function Container() {
+      return (
+        <div>
+          <h3>Total Click : {counter} </h3>
+          <button onClick={counterUp}>Click me!</button>
+        </div>
+      );
+    }
+    // html 실행시 함수, 컴포넌트는 실행 되지 않고 위에서 실행되다가 바로 랜더링 됨 = 페이지 로드
+    // Container 랜더링 될 텐데 그 때는 counter = 0
+    // ui 새로고침이 없음! 리렌더링이 필요 새로운 버전의 컨테이너
+    //ReactDOM.render(<Container />, root);
+    render();
+  </script>
+</html>
