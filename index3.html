@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    // 리액트 18버전
+    //const root = ReactDOM.createRoot(document.getElementById("root"));
+    //랜더 함수 부분 : root.render();
+
+    const root = document.getElementById("root");
+
+    function App() {
+      // data 의 값 초기값 , 값을 변경할 수 있는 함수 제공
+      // 이 형태에선 길이가 2인 배열 반환
+      //const data = React.useState(0);
+
+      //counter 초기값 / modifier : 값 변경함수
+      //배열을 반환 첫번째 data , 두번째 data 값 변경 함수
+      const [counter, modifier] = React.useState(0);
+
+      // 어떤 값을 부여하던 modifier함수는 그 값으로 업데이트하고 리렌더링을 일으킨다
+      // React.useState(0) 기능 신박하다
+      // modifier가 아니라 보통 set을 붙인다 ex setCounter
+      const onClick = () => {
+        modifier(counter + 1);
+        //밑에 두 코드가 위에 modifier로 다 가능
+        //counter=121212;
+        //ReactDOM.render(<App />, root);
+      };
+      //const counter = data[0];
+      //const modifier = data[1];
+
+      // 이벤트 등록 버튼
+      return (
+        <div>
+          <h3>Total Click : {counter} </h3>
+
+          <button onClick={onClick}>Click me!</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
